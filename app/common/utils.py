@@ -1,6 +1,5 @@
 import json
 
-
 from .variables import MAX_PACKAGE_LENGHT, ENCODING
 
 
