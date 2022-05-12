@@ -3,7 +3,6 @@ import os
 
 import logging.handlers
 
-
 sys.path.append('../')
 
 # Создание именованного логгера;
