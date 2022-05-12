@@ -15,7 +15,7 @@ FORMATTER = logging.Formatter('%(asctime)s %(levelname)s %(filename)s %(message)
 # Логирование должно производиться в лог-файл;
 PATH = os.path.dirname(os.path.abspath(__file__))
 PATH = os.path.join(PATH, 'server.log')
-LOG_FILE = logging.FileHandler(PATH, encoding='utf-8')
+LOG_FILE = logging.handlers.TimedRotatingFileHandler(PATH, encoding='utf8', interval=1, when='D')
 LOG_FILE.setFormatter(FORMATTER)
 
 LOGGER.addHandler(LOG_FILE)
