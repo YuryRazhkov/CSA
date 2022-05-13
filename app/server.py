@@ -3,6 +3,7 @@ import json
 import logging
 import socket
 import sys
+import logs.client_log_config
 
 from common.utils import get_message, send_message
 from common.variables import *

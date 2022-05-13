@@ -4,6 +4,7 @@ import logging
 import socket
 import sys
 import time
+import logs.client_log_config
 
 from common.utils import send_message, get_message
 from common.variables import *
