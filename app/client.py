@@ -19,7 +19,7 @@ def log(func):
         code_obj = caller_frame.f_code  # Объект кода выполняемый в caller_frame
         code_obj_name = code_obj.co_name  # Имя, с которым был определён code_obj
         res = func(*args, **kwargs)
-        CLIENT_LOGGER.info(f'Вызвана функция {func.__name__} с аргументами: {res}')
+        CLIENT_LOGGER.info(f'Вызвана функция {func.__name__} с аргументами: {args} {kwargs}')
         CLIENT_LOGGER.info(f'Функция {func.__name__} вызвана из функции {code_obj_name}')
         return res
 
