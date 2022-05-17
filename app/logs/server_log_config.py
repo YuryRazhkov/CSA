@@ -1,5 +1,6 @@
 import sys
 import os
+from logging.handlers import TimedRotatingFileHandler
 
 import logging.handlers
 
@@ -14,11 +15,11 @@ FORMATTER = logging.Formatter('%(asctime)s %(levelname)s %(filename)s %(message)
 # Логирование должно производиться в лог-файл;
 PATH = os.path.dirname(os.path.abspath(__file__))
 PATH = os.path.join(PATH, 'server.log')
-LOG_FILE = logging.handlers.TimedRotatingFileHandler(PATH, encoding='utf8', interval=1, when='D')
+LOG_FILE = logging.handlers.TimedRotatingFileHandler(PATH, encoding='utf8', interval=1, when='D', backupCount=5)
 LOG_FILE.setFormatter(FORMATTER)
 
 LOGGER.addHandler(LOG_FILE)
-LOGGER.setLevel(logging.INFO)
+LOGGER.setLevel(logging.DEBUG)
 
 # отладка
 if __name__ == '__main__':

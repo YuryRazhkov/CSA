@@ -1,18 +1,32 @@
+import inspect
 import json
 import logging
-import logs.server_log_config
 import socket
 import sys
+import logs.server_log_config
 
 from common.utils import get_message, send_message
 from common.variables import *
 
-
 SERVER_LOGGER = logging.getLogger('serverapp')
 
 
-def process_client_message(message):
+def log(func):
+    def decorated(*args, **kwargs):
+        current_frame = inspect.currentframe()  # Текущий фрейм
+        caller_frame = current_frame.f_back  # Следующий объект внешнего фрейма (вызывающий current_frame объект)
+        code_obj = caller_frame.f_code  # Объект кода выполняемый в caller_frame
+        code_obj_name = code_obj.co_name  # Имя, с которым был определён code_obj
+        res = func(*args, **kwargs)
+        SERVER_LOGGER.info(f'Вызвана функция {func.__name__} с аргументами: {args} {kwargs}')
+        SERVER_LOGGER.info(f'Функция {func.__name__} вызвана из функции {code_obj_name}')
+        return res
 
+    return decorated
+
+
+@log
+def process_client_message(message):
     if ACTION in message and message[ACTION] == PRESENCE and TIME in message and USER in message \
             and message[USER][ACCOUNT_NAME] == 'Guest':
         return {RESPONSE: 200}
@@ -22,8 +36,8 @@ def process_client_message(message):
     }
 
 
+@log
 def main():
-
     SERVER_LOGGER.info(f'start server')
     try:
         if '-p' in sys.argv:
