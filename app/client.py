@@ -1,17 +1,32 @@
+import inspect
 import json
 import logging
-import logs.client_log_config
 import socket
 import sys
 import time
+import logs.client_log_config
 
 from common.utils import send_message, get_message
 from common.variables import *
 
-
 CLIENT_LOGGER = logging.getLogger('clientapp')
 
 
+def log(func):
+    def decorated(*args, **kwargs):
+        current_frame = inspect.currentframe()  # Текущий фрейм
+        caller_frame = current_frame.f_back  # Следующий объект внешнего фрейма (вызывающий current_frame объект)
+        code_obj = caller_frame.f_code  # Объект кода выполняемый в caller_frame
+        code_obj_name = code_obj.co_name  # Имя, с которым был определён code_obj
+        res = func(*args, **kwargs)
+        CLIENT_LOGGER.info(f'Вызвана функция {func.__name__} с аргументами: {args} {kwargs}')
+        CLIENT_LOGGER.info(f'Функция {func.__name__} вызвана из функции {code_obj_name}')
+        return res
+
+    return decorated
+
+
+@log
 def create_presence(account_name='Guest'):
     out = {
         ACTION: PRESENCE,
@@ -22,6 +37,8 @@ def create_presence(account_name='Guest'):
     }
     return out
 
+
+@log
 def process_ans(message):
     if RESPONSE in message:
         if message[RESPONSE] == 200:
@@ -32,7 +49,6 @@ def process_ans(message):
 
 
 def main():
-
     try:
         server_adress = sys.argv[1]
         server_port = int(sys.argv[2])
@@ -58,6 +74,7 @@ def main():
         print(answer)
     except (ValueError, json.JSONDecoder):
         CLIENT_LOGGER.info('error: сообщение не декодируется')
+
 
 if __name__ == '__main__':
     main()
