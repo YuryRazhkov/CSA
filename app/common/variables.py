@@ -21,3 +21,9 @@ ERROR = 'error'
 DEFAULT_IP_ADDRESS = '127.0.0.1'
 
 DEFAULT_PORT = 7777
+
+SENDER = 'sender'
+
+MESSAGE = 'message'
+
+MESSAGE_TEXT = 'mess_text'
