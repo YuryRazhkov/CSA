@@ -118,14 +118,16 @@ def print_help():
 
 
 @log
-def create_presence(account_name='Guest'):
+def create_presence(account_name):
+    """Функция генерирует запрос о присутствии клиента"""
     out = {
         ACTION: PRESENCE,
         TIME: time.time(),
         USER: {
-            ACCOUNT_NAME: account_name,
+            ACCOUNT_NAME: account_name
         }
     }
+    CLIENT_LOGGER.debug(f'Сформировано {PRESENCE} сообщение для пользователя {account_name}')
     return out
 
 
