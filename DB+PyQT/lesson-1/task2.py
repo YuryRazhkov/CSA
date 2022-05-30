@@ -22,4 +22,4 @@ def host_range_ping(ip_list, range_ip=24):
 
 if __name__ == "__main__":
     ip_list = ['192.168.100.1', '192.168.100.2', 'ya.ru', 'none.not', 'google.com']
-    host_range_ping(ip_list=ip_list, range_ip=8)
+    print(host_range_ping(ip_list=ip_list, range_ip=8))

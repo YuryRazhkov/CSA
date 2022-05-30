@@ -16,9 +16,9 @@ from task2 import host_range_ping
 
 def host_range_ping_tab(ip_list):
     resulnt_of_ping = host_range_ping(ip_list)
-    print(tabulate(resulnt_of_ping, headers='keys', tablefmt="pipe", stralign="left"))
+    return tabulate(resulnt_of_ping, headers='keys', tablefmt="pipe", stralign="left")
 
 
 if __name__ == "__main__":
     ip_list = ['192.168.100.1', '127.0.0.1', 'ya.ru', 'none.not', 'google.com']
-    host_range_ping_tab(ip_list)
+    print(host_range_ping_tab(ip_list))
