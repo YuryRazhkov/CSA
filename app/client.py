@@ -1,13 +1,11 @@
 import argparse
-import inspect
-import json
 import socket
-import sys
 import threading
 import time
 
 from app.errors import IncorrectDataRecivedError, ServerError, ReqFieldMissingError
-from common.utils import send_message, get_message
+from app.metaclasses import ClientMaker
+from common.utils import *
 from common.variables import *
 
 logger = logging.getLogger('clientapp')
@@ -92,7 +90,7 @@ class ClientSender(threading.Thread):
 
 
 # Класс-приёмник сообщений с сервера. Принимает сообщения, выводит в консоль.
-class ClientReader(threading.Thread):
+class ClientReader(threading.Thread, metaclass=ClientMaker):
     def __init__(self, account_name, sock):
         self.account_name = account_name
         self.sock = sock
