@@ -16,4 +16,3 @@ class Port_num_check:
         if value < 0:
             raise ValueError("Port number should be greater than or equal 0")
         instance.__dict__[self.port_num] = value
-

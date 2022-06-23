@@ -1,18 +1,14 @@
-import sys
-import os
 import argparse
-import logging
 import configparser
-import logs.server_log_config
 
-from common.variables import *
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication
+
 from common.utils import *
-from common.decos import log
+from common.variables import *
 from server.core import MessageProcessor
 from server.database import ServerStorage
 from server.main_window import MainWindow
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import Qt
 
 # Инициализация логирования сервера.
 logger = logging.getLogger('server_dist')
@@ -20,7 +16,8 @@ logger = logging.getLogger('server_dist')
 
 @log
 def arg_parser(default_port, default_address):
-    """Парсер аргументов коммандной строки."""
+    """
+    Парсер аргументов коммандной строки."""
     logger.debug(
         f'Инициализация парсера аргументов коммандной строки: {sys.argv}')
     parser = argparse.ArgumentParser()

@@ -6,17 +6,11 @@ import sys
 
 sys.path.insert(0, os.path.join(os.getcwd(), '..'))
 
-import logs.client_log_config
-import logs.server_log_config
-
-
 from .variables import MAX_PACKAGE_LENGHT, ENCODING
 
+
 def log(func):
-
-
     def decorated(*args, **kwargs):
-
         logger_name = 'serverapp' if 'server.py' in sys.argv[0] else 'clientapp'
         LOGGER = logging.getLogger(logger_name)
 
