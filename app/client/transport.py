@@ -1,12 +1,13 @@
-import socket
-import sys
-import time
-import logging
-import json
-import threading
+import binascii
 import hashlib
 import hmac
-import binascii
+import json
+import logging
+import socket
+import sys
+import threading
+import time
+
 from PyQt5.QtCore import pyqtSignal, QObject
 
 sys.path.append('../')

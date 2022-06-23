@@ -1,8 +1,6 @@
-import sys
-import os
-
 import logging.handlers
-
+import os
+import sys
 
 sys.path.append('../')
 

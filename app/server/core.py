@@ -1,19 +1,14 @@
-import threading
-import logging
+import binascii
+import hmac
+import json
+import os
 import select
 import socket
-import json
-import hmac
-import binascii
-import os
 import sys
-
-
+import threading
 
 sys.path.append('../')
-from app.common.metaclasses import ServerMaker
 from app.common.descryptors import *
-from app.common.variables import *
 from app.common.utils import send_message, get_message
 from app.common.decos import login_required
 from app.common.descryptors import Port
